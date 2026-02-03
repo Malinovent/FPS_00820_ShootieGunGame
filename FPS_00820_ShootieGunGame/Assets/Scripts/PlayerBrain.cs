@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,7 @@ public class PlayerBrain : MonoBehaviour
 {
     [SerializeField] PlayerMotor playerMotor;
     [SerializeField] PlayerCamera playerCamera;
+    [SerializeField] WeaponManager weaponManager;
 
     PlayerControls controls;
 
@@ -25,6 +27,22 @@ public class PlayerBrain : MonoBehaviour
         controls.FPS.Move.canceled += Move;
 
         controls.FPS.Look.performed += Look;
+
+        controls.FPS.Fire.performed += Fire;
+        controls.FPS.Reload.performed += Reload;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void Reload(InputAction.CallbackContext ctx)
+    {
+        
+    }
+
+    private void Fire(InputAction.CallbackContext ctx)
+    {
+        weaponManager.OnFire();
     }
 
     private void Update()
