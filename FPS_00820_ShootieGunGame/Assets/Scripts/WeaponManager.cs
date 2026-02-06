@@ -1,20 +1,30 @@
+﻿using System;
 using UnityEngine;
-
 public class WeaponManager : MonoBehaviour
 {
-    [SerializeField] private WeaponBase[] weapons;
+    [SerializeField] WeaponBase[] weapons;
 
     private int weaponIndex = 0;
 
     private WeaponBase CurrentWeapon => weapons[weaponIndex];
 
-    /*public WeaponBase CurrentWeapon()
+    public void UpdateWeapon()
     {
-        return weapons[0];
-    }*/
+        CurrentWeapon.UpdateWeapon();
+    }
 
-    public void OnFire()
+    public void OnFirePressed()
     {
-        CurrentWeapon.OnFire();
+        CurrentWeapon.OnFirePressed();
+    }
+
+    public void OnFireReleased()
+    {
+        CurrentWeapon.OnFireReleased();
+    }
+
+    public void OnReload()
+    {
+        CurrentWeapon.OnReload();
     }
 }

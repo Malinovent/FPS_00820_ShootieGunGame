@@ -12,17 +12,13 @@ public class Pistol : WeaponBase
         mainCamera = Camera.main;
     }
 
-    public override void OnFire()
+    public override void UpdateWeapon()
     {
-        //Debug.Log("Pistol fired!");
-        /*if(Physics.Raycast(transform.position, transform.forward))
-        {
-            Debug.Log("Hit something!");
-        }*/
+        throw new System.NotImplementedException();
+    }
 
-        //Vector3 originPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        //Ray ray = new Ray(originPosition, transform.forward);
-
+    public override void OnFirePressed()
+    {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hitObject))
@@ -30,6 +26,11 @@ public class Pistol : WeaponBase
             Debug.Log($"Hit Object: {hitObject.collider.name}");
             hitPoints.Add(hitObject.point);
         }
+    }
+
+    public override void OnFireReleased()
+    {
+        throw new System.NotImplementedException();
     }
 
     public override void OnReload()
@@ -64,4 +65,6 @@ public class Pistol : WeaponBase
         }
         
     }
+
+
 }

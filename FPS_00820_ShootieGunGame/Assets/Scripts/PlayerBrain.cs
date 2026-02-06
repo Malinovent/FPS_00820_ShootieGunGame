@@ -2,19 +2,18 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/// <summary>
-/// Redirection inputs to actions
-/// </summary>
 public class PlayerBrain : MonoBehaviour
 {
+
     [SerializeField] PlayerMotor playerMotor;
     [SerializeField] PlayerCamera playerCamera;
-    [SerializeField] WeaponManager weaponManager;
+    [SerializeField] WeaponManager playerGunManager;
 
     PlayerControls controls;
 
-    Vector2 moveInput;
-    bool isActive = true;
+    private Vector2 moveInput;
+
+
 
     private void Awake()
     {
@@ -28,29 +27,39 @@ public class PlayerBrain : MonoBehaviour
 
         controls.FPS.Look.performed += Look;
 
-        controls.FPS.Fire.performed += Fire;
-        controls.FPS.Reload.performed += Reload;
+        controls.FPS.Fire.performed += OnFirePressed;
+        controls.FPS.Fire.canceled += OnFireReleased;
+        
+        controls.FPS.Reload.performed += OnReload;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    private void Reload(InputAction.CallbackContext ctx)
+    private void OnReload(InputAction.CallbackContext obj)
     {
-        
+        playerGunManager.OnReload();
     }
 
-    private void Fire(InputAction.CallbackContext ctx)
+    private void OnFireReleased(InputAction.CallbackContext obj)
     {
-        weaponManager.OnFire();
+        playerGunManager.OnFireReleased();
+    }
+
+    private void OnFirePressed(InputAction.CallbackContext ctx)
+    {
+        playerGunManager.OnFirePressed();
     }
 
     private void Update()
     {
-        if (!isActive)
-            return;
-
         playerMotor.Move(moveInput);
+        playerGunManager.UpdateWeapon();
+    }
+
+    private void Jump(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Jump!");
     }
 
     private void Move(InputAction.CallbackContext ctx)
@@ -58,20 +67,16 @@ public class PlayerBrain : MonoBehaviour
         moveInput = ctx.ReadValue<Vector2>();
     }
 
-
-    private void Jump(InputAction.CallbackContext ctx)
-    {
-        Debug.Log("Jumping!");
-    }
-
     private void Look(InputAction.CallbackContext ctx)
     {
-        Vector2 inputValues = ctx.ReadValue<Vector2>();
+        Vector2 input = ctx.ReadValue<Vector2>();
 
-        //Rotate player around the y axis
-        playerMotor.Rotate(inputValues.x);
+        playerMotor.Rotate(input.x);
+        playerCamera.Rotate(input.y);
+    }
 
-        //Roate the camera aroudn the x axis
-        playerCamera.Rotate(inputValues.y);
+    private void Sprint(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Sprint!");
     }
 }
