@@ -220,6 +220,8 @@ GameObject:
   m_Component:
   - component: {fileID: 158139009}
   - component: {fileID: 158139008}
+  - component: {fileID: 158139011}
+  - component: {fileID: 158139010}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -239,6 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4092b77bd3cfe049a5adcebced867ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pistol
+  ammo: {fileID: 158139011}
+  raycaster: {fileID: 158139010}
 --- !u!4 &158139009
 Transform:
   m_ObjectHideFlags: 0
@@ -255,6 +259,37 @@ Transform:
   - {fileID: 1155507994}
   m_Father: {fileID: 330585546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &158139010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158139007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d1e911dc74a2548823cf2ac959a456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Raycaster
+  validLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  mainCamera: {fileID: 0}
+--- !u!114 &158139011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158139007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359ea13b830304d4caf1da3add098706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Ammo
+  maxAmmo: 10
+  maxMagazine: 3
+  reloadTime: 2
 --- !u!1 &292986630
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,6 +780,8 @@ GameObject:
   m_Component:
   - component: {fileID: 761259694}
   - component: {fileID: 761259695}
+  - component: {fileID: 761259697}
+  - component: {fileID: 761259696}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -780,14 +817,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d21f1831d99c74b95db67b10a896f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSMG
-  maxAmmo: 10
-  maxMagazine: 3
-  reloadTime: 2
+  ammo: {fileID: 761259697}
+  raycaster: {fileID: 761259696}
   roundsPerSecond: 6
+--- !u!114 &761259696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761259693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d1e911dc74a2548823cf2ac959a456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Raycaster
   validLayers:
     serializedVersion: 2
     m_Bits: 4294967295
   mainCamera: {fileID: 0}
+--- !u!114 &761259697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761259693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 359ea13b830304d4caf1da3add098706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Ammo
+  maxAmmo: 24
+  maxMagazine: 3
+  reloadTime: 2
 --- !u!1 &774980510
 GameObject:
   m_ObjectHideFlags: 0
