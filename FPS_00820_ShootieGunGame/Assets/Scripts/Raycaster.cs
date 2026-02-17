@@ -30,7 +30,7 @@ public class Raycaster : MonoBehaviour
         return mainCamera.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    public void FireShot()
+    public RaycastHit FireShot()
     {
         Vector3 startingPosition = GetMouseWorldPosition();
         Ray ray = new Ray(startingPosition, transform.forward);
@@ -40,6 +40,8 @@ public class Raycaster : MonoBehaviour
         {
             Debug.Log("hit: " + hit.collider.name);
         }
+
+        return hit;
     }
 
     private void OnDrawGizmos()
