@@ -6,6 +6,11 @@ public class Pistol : WeaponBase
     [SerializeField] private Ammo ammo;
     [SerializeField] private Raycaster raycaster;
 
+    private void OnEnable()
+    {
+        SendWeaponInfo();
+    }
+
     public override void UpdateWeapon()
     {
         //Update reload timer
@@ -20,6 +25,7 @@ public class Pistol : WeaponBase
         {
             ammo.FireShot();
             raycaster.FireShot();
+            SendWeaponInfo();
         }
     }
 
@@ -31,5 +37,12 @@ public class Pistol : WeaponBase
     public override void OnReload()
     {
         ammo.StartReload();
+        SendWeaponInfo();
+    }
+
+    private void SendWeaponInfo()
+    {
+        WeaponInfo info = new WeaponInfo(weaponName, "__\n" + ammo.MaxAmmo.ToString(), ammo.RemainingAmmo.ToString(), ammo.RemainingMagazine.ToString());
+        onWeaponUpdated?.Invoke(info);
     }
 }
