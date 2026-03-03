@@ -15,6 +15,7 @@ public class UIWeaponManager : MonoBehaviour
     private void OnEnable()
     {
         WeaponBase.onWeaponUpdated += OnWeaponUpdated;
+
     }
 
     private void OnDisable()

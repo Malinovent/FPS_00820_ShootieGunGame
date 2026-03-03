@@ -3,7 +3,7 @@ using System;
 
 public abstract class WeaponBase : MonoBehaviour
 {
-    public static Action<WeaponInfo> onWeaponUpdated;
+    public static event Action<WeaponInfo> onWeaponUpdated;
 
     [SerializeField] protected string weaponName = "Pistol";
 

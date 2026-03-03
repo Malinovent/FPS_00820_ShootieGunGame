@@ -9,6 +9,12 @@ public class Pistol : WeaponBase
     private void OnEnable()
     {
         SendWeaponInfo();
+        ammo.OnReload += SendWeaponInfo;
+    }
+
+    private void OnDisable()
+    {
+        ammo.OnReload -= SendWeaponInfo;
     }
 
     public override void UpdateWeapon()
@@ -43,6 +49,6 @@ public class Pistol : WeaponBase
     private void SendWeaponInfo()
     {
         WeaponInfo info = new WeaponInfo(weaponName, "__\n" + ammo.MaxAmmo.ToString(), ammo.RemainingAmmo.ToString(), ammo.RemainingMagazine.ToString());
-        onWeaponUpdated?.Invoke(info);
+        //onWeaponUpdated?.Invoke(info);
     }
 }

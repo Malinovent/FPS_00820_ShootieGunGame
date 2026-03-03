@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
+using System;
+using UnityEngine.Events;
 
 public class Ammo : MonoBehaviour
 {
+
+    [SerializeField] UnityEvent onFireShot;
+
     [Header("Ammo Parameters")]
     [SerializeField] private int maxAmmo = 10;
     [SerializeField] private int maxMagazine = 3;
@@ -18,6 +23,8 @@ public class Ammo : MonoBehaviour
     public int MaxAmmo => maxAmmo;
     public int RemainingAmmo => remainingAmmo;
     public int RemainingMagazine => remainingMagazines;
+
+    public Action OnReload;
 
 
 
@@ -42,6 +49,7 @@ public class Ammo : MonoBehaviour
     public void FireShot()
     {
         remainingAmmo = Mathf.Max(0, remainingAmmo - 1);
+        onFireShot?.Invoke();
     }
 
     public bool HasAmmo()
@@ -68,6 +76,8 @@ public class Ammo : MonoBehaviour
         remainingAmmo = maxAmmo;
         reloadTimer = 0f;
         remainingMagazines = Mathf.Max(0, remainingMagazines - 1);
+
+        OnReload?.Invoke();
         Debug.Log("Reloaded. Current Magazine: " + remainingMagazines);
     }
 }
