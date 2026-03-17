@@ -5,6 +5,7 @@ public class Pistol : WeaponBase
 {
     [SerializeField] private Ammo ammo;
     [SerializeField] private Raycaster raycaster;
+    [SerializeField] private Damager damager;
 
     private void OnEnable()
     {
@@ -30,7 +31,14 @@ public class Pistol : WeaponBase
         if(ammo.HasAmmo() && !ammo.IsReloading)
         {
             ammo.FireShot();
-            raycaster.FireShot();
+            RaycastHit hit = raycaster.FireShot();
+
+            IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+            if(damageable != null)
+            {
+                damager.DoDamage(damageable);
+            }
+
             SendWeaponInfo();
         }
     }

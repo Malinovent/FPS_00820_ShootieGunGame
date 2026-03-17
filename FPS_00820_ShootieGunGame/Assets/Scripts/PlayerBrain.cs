@@ -8,6 +8,7 @@ public class PlayerBrain : MonoBehaviour
     [SerializeField] PlayerMotor playerMotor;
     [SerializeField] PlayerCamera playerCamera;
     [SerializeField] WeaponManager playerGunManager;
+    [SerializeField] Interactor interactor;
 
     PlayerControls controls;
 
@@ -29,11 +30,18 @@ public class PlayerBrain : MonoBehaviour
 
         controls.FPS.Fire.performed += OnFirePressed;
         controls.FPS.Fire.canceled += OnFireReleased;
-        
+
         controls.FPS.Reload.performed += OnReload;
+
+        controls.FPS.Interact.performed += OnInteract;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void OnInteract(InputAction.CallbackContext obj)
+    {
+        interactor.Interact();
     }
 
     private void OnReload(InputAction.CallbackContext obj)

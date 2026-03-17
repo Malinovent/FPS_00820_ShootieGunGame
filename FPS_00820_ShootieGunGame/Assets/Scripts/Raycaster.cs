@@ -30,11 +30,11 @@ public class Raycaster : MonoBehaviour
         return mainCamera.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    public RaycastHit FireShot()
+    public RaycastHit FireShot(float distance = 100f)
     {
         Vector3 startingPosition = GetMouseWorldPosition();
         Ray ray = new Ray(startingPosition, transform.forward);
-        RaycastHit hit = GetRaycastTarget(ray, 100f);
+        RaycastHit hit = GetRaycastTarget(ray, distance);
 
         if (hit.collider != null)
         {
