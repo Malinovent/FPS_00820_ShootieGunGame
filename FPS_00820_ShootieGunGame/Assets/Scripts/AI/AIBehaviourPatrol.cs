@@ -11,7 +11,7 @@ public class AIBehaviourPatrol : MonoBehaviour
     private int currentWaypointIndex = 0;
     private Transform currentWaypoint;
 
-    private void Start()
+    public void StartPatrol()
     {
         currentWaypoint = waypoints[currentWaypointIndex];
         onNewWaypoint?.Invoke(currentWaypoint);
