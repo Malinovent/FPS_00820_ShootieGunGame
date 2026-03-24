@@ -1820,7 +1820,7 @@ MonoBehaviour:
   - {fileID: 1093126972}
   - {fileID: 1256350724}
   - {fileID: 780494569}
-  distanceThreshold: 1
+  distanceThreshold: 3
 --- !u!114 &623739396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1835,6 +1835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AIBehaviourChase
   tooFarDistance: 15
   tooCloseDistance: 4
+  chaseSpeed: 4
 --- !u!114 &623739397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2029,7 +2030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMotor
   characterController: {fileID: 774980516}
-  speed: 5
+  speed: 8
 --- !u!114 &774980518
 MonoBehaviour:
   m_ObjectHideFlags: 0
